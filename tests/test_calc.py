@@ -1,6 +1,6 @@
 import pytest
 
-from src.calc import add, divide, multiply, subtract
+from src.calc import add, divide, multiply, power, subtract
 
 
 def test_add():
@@ -17,6 +17,18 @@ def test_multiply():
 
 def test_multiply_by_zero():
     assert multiply(5, 0) == 0
+
+
+def test_power():
+    assert power(2, 3) == 8
+
+
+def test_power_zero_exponent():
+    assert power(7, 0) == 1
+
+
+def test_power_negative_exponent():
+    assert power(2, -2) == 0.25
 
 
 def test_divide():
