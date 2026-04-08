@@ -1,6 +1,6 @@
 import pytest
 
-from src.calc import add, divide, multiply, subtract
+from src.calc import add, divide, multiply, power, sqrt, subtract
 
 
 def test_add():
@@ -17,6 +17,26 @@ def test_multiply():
 
 def test_multiply_by_zero():
     assert multiply(5, 0) == 0
+
+
+def test_power():
+    assert power(2, 3) == 8
+
+
+def test_power_zero_exponent():
+    assert power(7, 0) == 1
+
+
+def test_power_negative_exponent():
+    assert power(2, -2) == 0.25
+
+
+def test_sqrt_perfect_square():
+    assert sqrt(16) == 4
+
+
+def test_sqrt_non_perfect_square():
+    assert sqrt(2) == pytest.approx(2**0.5)
 
 
 def test_divide():

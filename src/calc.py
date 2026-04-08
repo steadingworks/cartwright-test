@@ -13,6 +13,14 @@ def multiply(a: float, b: float) -> float:
     return a * b
 
 
+def power(base: float, exponent: float) -> float:
+    return base**exponent
+
+
+def sqrt(n: float) -> float:
+    return power(n, 0.5)
+
+
 def divide(a: float, b: float) -> float:
     if b == 0:
         raise ValueError("Cannot divide by zero.")
