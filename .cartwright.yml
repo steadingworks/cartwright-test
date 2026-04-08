@@ -1,0 +1,4 @@
+summary: "Simple Python CLI calculator — test repo for Cartwright software factory"
+setup: "pip install -e '.[dev]'"
+test: "python -m pytest"
+lint: "python -m py_compile src/calc.py"
