@@ -1,6 +1,15 @@
 import pytest
 
-from src.calc import add, divide, multiply, power, sqrt, subtract
+from src.calc import (
+    CalculationError,
+    InvalidInputError,
+    add,
+    divide,
+    multiply,
+    power,
+    sqrt,
+    subtract,
+)
 
 
 def test_add():
@@ -48,5 +57,57 @@ def test_divide_decimal():
 
 
 def test_divide_by_zero():
-    with pytest.raises(ValueError, match="divide by zero"):
+    with pytest.raises(CalculationError, match="Cannot divide by zero"):
         divide(1, 0)
+
+
+@pytest.mark.parametrize(
+    ("a", "b", "operand_name"),
+    [
+        ("3", 1, "a"),
+        (1, None, "b"),
+        ([1], 1, "a"),
+    ],
+)
+def test_add_invalid_inputs(a, b, operand_name):
+    with pytest.raises(InvalidInputError, match=f"{operand_name} must be an int or float"):
+        add(a, b)
+
+
+@pytest.mark.parametrize(
+    ("a", "b", "operand_name"),
+    [
+        (None, 1, "a"),
+        (1, "3", "b"),
+        (1, [1], "b"),
+    ],
+)
+def test_subtract_invalid_inputs(a, b, operand_name):
+    with pytest.raises(InvalidInputError, match=f"{operand_name} must be an int or float"):
+        subtract(a, b)
+
+
+@pytest.mark.parametrize(
+    ("a", "b", "operand_name"),
+    [
+        ([1], 1, "a"),
+        (1, None, "b"),
+        ("3", 1, "a"),
+    ],
+)
+def test_multiply_invalid_inputs(a, b, operand_name):
+    with pytest.raises(InvalidInputError, match=f"{operand_name} must be an int or float"):
+        multiply(a, b)
+
+
+@pytest.mark.parametrize(
+    ("a", "b", "operand_name"),
+    [
+        ("3", 1, "a"),
+        (1, [1], "b"),
+        (1, None, "b"),
+    ],
+)
+def test_divide_invalid_inputs(a, b, operand_name):
+    with pytest.raises(InvalidInputError, match=f"{operand_name} must be an int or float"):
+        divide(a, b)
