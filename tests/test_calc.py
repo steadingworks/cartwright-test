@@ -7,6 +7,7 @@ from src.calc import (
     divide,
     multiply,
     power,
+    sqrt,
     subtract,
 )
 
@@ -37,6 +38,14 @@ def test_power_zero_exponent():
 
 def test_power_negative_exponent():
     assert power(2, -2) == 0.25
+
+
+def test_sqrt_perfect_square():
+    assert sqrt(16) == 4
+
+
+def test_sqrt_non_perfect_square():
+    assert sqrt(2) == pytest.approx(2**0.5)
 
 
 def test_divide():
