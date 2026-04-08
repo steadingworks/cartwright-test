@@ -32,6 +32,21 @@ def multiply(a: float, b: float) -> float:
     return a * b
 
 
+def modulo(a: float, b: float) -> float:
+    """Return the remainder of a divided by b.
+
+    Raises:
+        InvalidInputError: If either operand is not an int or float.
+        ValueError: If b is zero.
+    """
+
+    _validate_numeric_operand(a, "a")
+    _validate_numeric_operand(b, "b")
+    if b == 0:
+        raise ValueError("Cannot take modulo by zero.")
+    return a % b
+
+
 def power(base: float, exponent: float) -> float:
     return base**exponent
 
