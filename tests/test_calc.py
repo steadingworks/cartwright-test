@@ -5,6 +5,7 @@ from src.calc import (
     InvalidInputError,
     add,
     divide,
+    modulo,
     multiply,
     power,
     sqrt,
@@ -61,6 +62,24 @@ def test_divide_by_zero():
         divide(1, 0)
 
 
+def test_modulo():
+    assert modulo(7, 3) == 1
+
+
+def test_modulo_negative_operands():
+    assert modulo(-7, 3) == 2
+    assert modulo(7, -3) == -2
+
+
+def test_modulo_decimal():
+    assert modulo(7.5, 2) == 1.5
+
+
+def test_modulo_by_zero():
+    with pytest.raises(ValueError, match="Cannot take modulo by zero"):
+        modulo(1, 0)
+
+
 @pytest.mark.parametrize(
     ("a", "b", "operand_name"),
     [
@@ -111,3 +130,16 @@ def test_multiply_invalid_inputs(a, b, operand_name):
 def test_divide_invalid_inputs(a, b, operand_name):
     with pytest.raises(InvalidInputError, match=f"{operand_name} must be an int or float"):
         divide(a, b)
+
+
+@pytest.mark.parametrize(
+    ("a", "b", "operand_name"),
+    [
+        ("3", 1, "a"),
+        (1, None, "b"),
+        ([1], 1, "a"),
+    ],
+)
+def test_modulo_invalid_inputs(a, b, operand_name):
+    with pytest.raises(InvalidInputError, match=f"{operand_name} must be an int or float"):
+        modulo(a, b)
